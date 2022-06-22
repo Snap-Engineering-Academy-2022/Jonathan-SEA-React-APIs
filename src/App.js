@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import './App.css';
 // import characters from './protagonists.json'
+import CharacterCard from './CharacterCard.js';
 
 function App() {
   return (
@@ -67,45 +68,51 @@ function App() {
             xs={12}
             md={4}
           >
-            <Card>
-              <CardMedia
-                component="img"
-                height="350px"
-                image={"https://i.imgur.com/56chgMj.png"}
-              />
-              <CardHeader
-                title={"Miles Morales"}
-                titleTypographyProps={{ align: 'center' }}
-                sx={{ mt: 1 }}
-              />
-              <CardContent sx={{ pt: 0 }}>
-                <ul>
-                    <Typography component="li">
-                      Definitely Not Spiderman
-                    </Typography>
-                    <Typography component="li">
-                      "Lanky Puberty Boy" vibes
-                    </Typography>
-                    <Typography component="li">
-                      Can't do it on demand
-                    </Typography>
-                    <Typography component="li">
-                      Elite music taste
-                    </Typography>
-                </ul>
-              </CardContent>
-              <CardActions>
-                <Button 
-                  variant="contained"
-                  sx={{ px: 6, mx: 'auto' }}
-                  // I'm trying to use custom CSS defined in the file App.css,
-                  // but it isn't working. Why, and how can I fix it?
-                  className="characterButton"
-                >
-                  Vote
-                </Button>
-              </CardActions>
-            </Card>
+            <CharacterCard
+                name = "Miles Morales"
+                image = "https://i.imgur.com/56chgMj.png"
+                description =  {[
+                  "Definitely Not Spiderman",
+                  "\"Lanky Puberty Boy\" vibes",
+                  "Can't do it on demand",
+                  "Elite music taste"
+                ]}
+                
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={4}
+          >
+            <CharacterCard
+                name = "Moana Waialiki"
+                image = "https://i.imgur.com/zuscNPl.png"
+                description = {[
+                  "Glass half full kinda gal",
+                  "Lackluster chicken mom",
+                  "Spaces out looking at water",
+                  "Never really knows why"
+                ]}
+
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={4}
+          >
+            <CharacterCard
+                name = "Hiro Hamada"
+                image = "https://i.imgur.com/SaYqUTP.png"
+                description = {[
+                  "Saved by a flying pillow. Again.",
+                  "Has epic bedhead",
+                  "Hiro = Hiccup, Baymax = Toothless",
+                  "Neeeeeeeeeeeeeeeerd"
+                ]}
+
+            />
           </Grid>
         </Grid>
       </Container>
