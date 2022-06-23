@@ -11,7 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import './App.css';
-// import characters from './protagonists.json'
+import characters from './protagonists.json'
 import CharacterCard from './CharacterCard.js';
 
 function App() {
@@ -63,57 +63,21 @@ function App() {
           justifyContent="center"
           alignItems="flex-start"
         >
-          <Grid
-            item
-            xs={12}
-            md={4}
-          >
+          {
+            characters.map((character) =>
+            <Grid
+              item
+              xs={12}
+              md={4}
+            >
             <CharacterCard
-                name = "Miles Morales"
-                image = "https://i.imgur.com/56chgMj.png"
-                description =  {[
-                  "Definitely Not Spiderman",
-                  "\"Lanky Puberty Boy\" vibes",
-                  "Can't do it on demand",
-                  "Elite music taste"
-                ]}
+                name = {character.title}
+                image = {character.pic}
+                description = {character.description}
                 
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-          >
-            <CharacterCard
-                name = "Moana Waialiki"
-                image = "https://i.imgur.com/zuscNPl.png"
-                description = {[
-                  "Glass half full kinda gal",
-                  "Lackluster chicken mom",
-                  "Spaces out looking at water",
-                  "Never really knows why"
-                ]}
-
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-          >
-            <CharacterCard
-                name = "Hiro Hamada"
-                image = "https://i.imgur.com/SaYqUTP.png"
-                description = {[
-                  "Saved by a flying pillow. Again.",
-                  "Has epic bedhead",
-                  "Hiro = Hiccup, Baymax = Toothless",
-                  "Neeeeeeeeeeeeeeeerd"
-                ]}
-
-            />
-          </Grid>
+          )}
         </Grid>
       </Container>
     </div>
