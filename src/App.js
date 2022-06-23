@@ -14,7 +14,35 @@ import './App.css';
 import characters from './protagonists.json'
 import CharacterCard from './CharacterCard.js';
 
+// var requestOptions = {
+//   method: 'GET',
+//   redirect: 'follow'
+// };
+
+// let animalData = "";
+// fetch("https://zoo-animal-api.herokuapp.com/animals/rand/3", requestOptions)
+//   .then(response => response.text())
+//   .then(result => {
+//     console.log("special animals", result)
+//     animalData = result;
+//   })
+//   .catch(error => console.log('error', error));
+
 function App() {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  let animalData = "";
+  fetch("https://zoo-animal-api.herokuapp.com/animals/rand/3", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log("animals JSON data", result)
+      animalData = result;
+  })
+  .catch(error => console.log('error', error));
+
   return (
     <div className="App">
       <CssBaseline />
