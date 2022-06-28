@@ -23,11 +23,14 @@ export default function CharacterCard(props) {
       />
       <CardContent sx={{ pt: 0 }}>
         <ul>
-          {props.description.map((sentence) =>
+          {/* {props.description.map((sentence) =>
             <Typography component="li">
               {sentence}
             </Typography>
-          )}
+          )} */}
+          <Typography component="li">
+              {props.description}
+          </Typography>
         </ul>
       </CardContent>
       <CardActions>

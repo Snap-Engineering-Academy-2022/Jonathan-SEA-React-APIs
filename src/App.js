@@ -13,35 +13,45 @@ import Container from '@mui/material/Container';
 import './App.css';
 import characters from './protagonists.json'
 import CharacterCard from './CharacterCard.js';
+import React, { useState, useEffect } from 'react';
 
-// var requestOptions = {
-//   method: 'GET',
-//   redirect: 'follow'
-// };
-
-// let animalData = "";
-// fetch("https://zoo-animal-api.herokuapp.com/animals/rand/3", requestOptions)
-//   .then(response => response.text())
-//   .then(result => {
-//     console.log("special animals", result)
-//     animalData = result;
-//   })
-//   .catch(error => console.log('error', error));
 
 function App() {
+  
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
 
-  let animalData = "";
-  fetch("https://zoo-animal-api.herokuapp.com/animals/rand/3", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      console.log("animals JSON data", result)
-      animalData = result;
-  })
-  .catch(error => console.log('error', error));
+  const [dogData, setDogData] = useState([]);
+  const [dogTemperaments, setDogTemperaments] = useState([]);
+
+  function newFetch() {
+    fetch("https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=5", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                  console.log("2 inside fetch", Date.now());
+                  console.log("3 special dogs", result, "---", Date.now())
+                  setDogData(result)
+                  setDogTemperaments(result[breeds][0].temperament)
+                  console.log("<++++++++DogTemps++++>", dogTemperaments)
+                })
+                .catch(error => console.log('error', error));
+            
+              console.log("4 after fetch", dogTemperaments, "---", Date.now());
+  }
+
+  useEffect(() => {newFetch()}, [])
+
+  var traits = new Set([]);
+
+  // for(let i = 0; i < dogTemperaments.length; i++) {
+  //   let newArr = dogTemperaments[i].split(', ')
+  //   traits = new Set([...traits, ...newArr]);
+  // }
+
+  var selected = []
+
 
   return (
     <div className="App">
@@ -54,15 +64,18 @@ function App() {
       >
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Characters Inc
+            HumanToDog
           </Typography>
           <Button 
             href="#" 
             variant="outlined" 
             sx={{ my: 1, mx: 1.5 }}
-            onClick={() => alert("Boop!")}
+            onClick={() => {
+              console.log("1 before fetch in App()", dogData, "---", Date.now());
+              newFetch()
+            }}
           >
-            Button
+            AGAIN!
           </Button>
         </Toolbar>
       </AppBar>
@@ -73,7 +86,7 @@ function App() {
           color="text.primary"
           sx={{ py: 2}}
         >
-          Prevalent Protagonists
+          What dog are you? hehe
         </Typography>
         <Typography 
           variant="h5" 
@@ -81,9 +94,25 @@ function App() {
           color="text.secondary"
           sx={{ mx: 10 }}
         >
-          Hmm, seems like we're missing some of the other protagonists.
+          Select the personality traits that best represent you to see what dog breed you are!
         </Typography>
       </Container>
+      {/* <Container maxWidth="md" sx={{ my: 4}}>
+      <ul>
+          {traits.map((trait) =>
+            <Button 
+            href="#" 
+            variant="outlined" 
+            sx={{ my: 1, mx: 1.5 }}
+            onClick={() => {
+              selected.push(trait);
+            }}
+          >
+            {trait}
+          </Button>
+          )}
+        </ul>
+      </Container> */}
       {/* End hero unit */}
       <Container maxWidth="lg">
         <Grid container 
@@ -92,16 +121,16 @@ function App() {
           alignItems="flex-start"
         >
           {
-            characters.map((character) =>
+            dogData && dogData.map((dog) =>
             <Grid
               item
               xs={12}
               md={4}
             >
             <CharacterCard
-                name = {character.title}
-                image = {character.pic}
-                description = {character.description}
+                name = {dog.breeds[0].name}
+                image = {dog.url}
+                description = {dog.breeds[0].temperament}
                 
             />
           </Grid>
